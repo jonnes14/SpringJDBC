@@ -10,6 +10,11 @@ import java.util.List;
 
 @Repository
 public class StudentRepo {
+  /*personal notes*/
+    //Spring's JdbcTemplate for database interactions. JdbcTemplate is a core component of the
+    // Spring framework's JDBC support, providing a high-level abstraction over the standard JDBC API,
+    // significantly reducing boilerplate code and handling common tasks like
+    // resource management and exception handling.
    private JdbcTemplate jdbc;
 
    @Autowired
@@ -21,7 +26,9 @@ public class StudentRepo {
     }
 
     public void save(Student s){
-        System.out.println("saved");
+       String sql="insert into student(rollno , name , marks) values(?,?,?)";
+        int rows =jdbc.update(sql,s.getRollNo(),s.getName(),s.getMarks());
+        System.out.println("rows affected"+rows);
     }
 
     public List<Student> findAll() {
